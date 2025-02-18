@@ -1,0 +1,136 @@
+﻿
+
+@page "/branches"
+@using DataModels;
+@rendermode InteractiveServer
+
+
+<PageTitle>Telephelyek</PageTitle>
+
+@code {
+
+    [Inject] public required IHttpClientFactory HttpClientFactory { get; set; }
+
+    private List<Branches> BranchList = new();
+    private IList<Branches>? selectedBranch;
+    private RadzenDataGrid<Branches>? branchGrid;
+
+    private bool NoSelection
+        => selectedBranch is null || selectedBranch.Count == 0;
+    protected override async Task OnInitializedAsync()
+    {
+        BranchList.Clear();
+
+        var client = HttpClientFactory.CreateClient("ServerAPI");
+        var respb = await client.GetFromJsonAsync<List<Branches>>(APIUri.BranchesGetList);
+        if (respb is not null)
+        {
+            BranchList.AddRange(respb);
+            if (branchGrid is not null)
+            {
+                await branchGrid.Reload();
+            }
+        }
+
+        StateHasChanged();
+
+    }
+
+    BranchDto newBranch = new BranchDto();
+
+    bool Open = false;
+    void NewData()
+    {
+        Open = true;
+    }
+
+    void Close()
+    {
+        Open = false;
+    }
+
+    async Task SaveBranch()
+    {
+        var client = HttpClientFactory.CreateClient("ServerAPI");
+
+        var response = await client.PostAsJsonAsync("api/branches", newBranch);
+
+        if (response.IsSuccessStatusCode)
+        {
+            await OnInitializedAsync();
+        }
+        else
+        {
+            Console.WriteLine("Hiba történt az autó mentésekor.");
+        }
+    }
+
+    async Task DeleteBranch()
+    {
+        if (selectedBranch != null)
+        {
+            var branchToDelete = selectedBranch.First();
+            var client = HttpClientFactory.CreateClient("ServerAPI");
+
+            var response = await client.DeleteAsync($"/api/branches/{branchToDelete.branchesId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Ha sikerült a törlés, frissítjük a listát
+                BranchList.Remove(branchToDelete);
+                await branchGrid.Reload();
+            }
+            else
+            {
+                // Hiba kezelése
+                Console.WriteLine("Hiba történt a törlés során.");
+            }
+        }
+    }
+}
+
+@if (!RendererInfo.IsInteractive)   
+{
+    <p><em>Betöltés folyamatban...</em></p>
+}
+else
+{
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css">
+
+     <RadzenRow>
+        <RadzenColumn Size="12">
+            <RadzenDataGrid @ref="branchGrid" Data="BranchList" PageSize="5" ColumnWidth="100%" AllowSorting="true"
+                SelectionMode="DataGridSelectionMode.Single" AllowSotring = "true" @bind-Value=@selectedBranch>
+                <Columns>
+                    <RadzenDataGridColumn Property="@nameof(Branches.branchesId)" Title="Azonostó"/>
+                    <RadzenDataGridColumn Property="@nameof(Branches.branchName)" Title="Név"/>
+                    <RadzenDataGridColumn Property="@nameof(Branches.address)" Title="Cím"/>
+                </Columns>
+            </RadzenDataGrid>
+        </RadzenColumn>
+
+        <RadzenColumn Size="2">
+            <RadzenStack Orientation="Orientation.Vertical" Gap="12px">
+                <RadzenButton Text="Új" ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Dark" Style="width: 96pt" Click="NewData" />
+                <RadzenButton Text="Törlés" Disabled=@NoSelection
+                              ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter" Style="width: 96pt" Click="DeleteBranch" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+
+    <RadzenTemplateForm Data="@newBranch" TContext="Branches" Visible="@Open">
+        <RadzenStack Orientation="Orientation.Vertical" Gap="12px">
+            <RadzenLabel Text="Telephely neve" For="newBranch.branchName" />
+            <RadzenNumeric @bind-Value="newBranch.branchName" Placeholder="Telephely" />
+
+            <RadzenLabel Text="Cím" For="newBranch.address" />
+            <RadzenNumeric @bind-Value="newBranch.address" Placeholder="Cím" />
+
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="12px">
+                <RadzenButton Text="Mégse" ButtonStyle="ButtonStyle.Secondary" Click="Close" />
+                <RadzenButton Text="Mentés" ButtonStyle="ButtonStyle.Primary" Click="SaveBranch"/>
+            </RadzenStack>
+        </RadzenStack>
+    </RadzenTemplateForm>
+
+}

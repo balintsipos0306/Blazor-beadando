@@ -1,0 +1,144 @@
+﻿@page "/cars"
+@using DataModels;
+@rendermode InteractiveServer
+
+<PageTitle>Autók</PageTitle>
+<h3>Autók</h3>
+
+@code {
+
+    [Inject] public required IHttpClientFactory HttpClientFactory { get; set; }
+
+    private List<Car> CarList = new();
+    private IList<Car>? selectedCar;
+    private RadzenDataGrid<Car>? CarGrid;
+
+    private bool NoSelection
+        => selectedCar is null || selectedCar.Count == 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        CarList.Clear();
+
+        var client = HttpClientFactory.CreateClient("ServerAPI");
+        var respb = await client.GetFromJsonAsync<List<Car>>(APIUri.CarGetList);
+        if (respb is not null)
+        {
+            CarList.AddRange(respb);
+            if (CarGrid is not null)
+            {
+                await CarGrid.Reload();
+            }
+        }
+        StateHasChanged();
+    }
+
+    // bool isModalOpen = false;
+    CarDto newCar = new CarDto();
+
+
+    bool Open = false;
+    void NewData()
+    {
+        Open = true;
+    }
+
+    void Close()
+    {
+        Open = false;
+    }
+
+    async Task SaveCar()
+    {
+        var client = HttpClientFactory.CreateClient("ServerAPI");
+
+        var response = await client.PostAsJsonAsync("api/cars", newCar);
+
+        if (response.IsSuccessStatusCode)
+        {
+            await OnInitializedAsync();
+        }
+        else
+        {
+            Console.WriteLine("Hiba történt a telephely mentésekor.");
+        }
+    }
+
+
+    async Task delete()
+    {
+        if (selectedCar != null)
+        {
+            var carToDelete = selectedCar.First();
+            var client = HttpClientFactory.CreateClient("ServerAPI");
+
+            var response = await client.DeleteAsync($"api/cars/{carToDelete.carId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                CarList.Remove(carToDelete);
+                await OnInitializedAsync();
+            }
+            else
+            {
+                // Ha hiba történik
+                Console.WriteLine("Hiba a törlés során");
+            }
+        }
+    }
+}
+
+@if (!RendererInfo.IsInteractive)
+{
+    <p><em>Betöltés folyamatban...</em></p>
+}
+else
+{
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css">
+
+
+     <RadzenRow>
+        <RadzenColumn Size="12">
+            <RadzenDataGrid @ref="CarGrid" Data="CarList" PageSize="5" ColumnWidth="100%" AllowAlternatingRows="true" AllowSorting="true" SelectionMode="DataGridSelectionMode.Single" @bind-Value="@selectedCar">
+                <Columns>
+                    <RadzenDataGridColumn Property="@nameof(Car.carId)" Title="Azonostó"/>
+                    <RadzenDataGridColumn Property="@nameof(Car.branchName)" Title=" Telephely"/>
+                    <RadzenDataGridColumn Property="@nameof(Car.brandName)" Title="Márka"/>
+                    <RadzenDataGridColumn Property="@nameof(Car.typeName)" Title="Típus"/>
+                    <RadzenDataGridColumn Property="@nameof(Car.year)" Title="Évjárat"/>
+                    <RadzenDataGridColumn Property="@nameof(Car.price)" Title="Ár (Ft)"/>
+                </Columns>
+            </RadzenDataGrid>
+        </RadzenColumn>
+
+        <RadzenColumn Size="2">
+            <RadzenStack Orientation="Orientation.Vertical" Gap="12px">
+                <RadzenButton Text="Új" ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Dark" Style="width: 96pt" Click="NewData"/>
+                <RadzenButton Text="Törlés" Disabled=@NoSelection
+                              ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter" Style="width: 96pt" Click="delete" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+
+    <RadzenTemplateForm Data="@newCar" TContext="CarDto" Visible="@Open">
+        <RadzenStack Orientation="Orientation.Vertical" Gap="12px">
+            
+            <RadzenLabel Text="Telephely azonosító" For="newCar.branchId" />
+            <RadzenNumeric @bind-Value="newCar.branchId" Placeholder="Telephely" />
+
+            <RadzenLabel Text="Típus azonosító" For="newCar.typeId" />
+            <RadzenNumeric @bind-Value="newCar.typeId" Placeholder="Típus" />
+
+            <RadzenLabel Text="Évjárat" For="newCar.year" />
+            <RadzenNumeric @bind-Value="newCar.year" Placeholder="Évjárat" />
+
+            <RadzenLabel Text="Ár (Ft)" For="newCar.price" />
+            <RadzenNumeric @bind-Value="newCar.price" Placeholder="Ár" />
+
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="12px">
+                <RadzenButton Text="Mégse" ButtonStyle="ButtonStyle.Secondary" Click="Close"/>
+                <RadzenButton Text="Mentés" ButtonStyle="ButtonStyle.Primary" Click="SaveCar"/>
+            </RadzenStack>
+        </RadzenStack>
+    </RadzenTemplateForm>
+}

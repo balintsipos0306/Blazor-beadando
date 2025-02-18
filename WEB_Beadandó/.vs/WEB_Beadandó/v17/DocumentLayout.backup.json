@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\GDA939\\Desktop\\WEB_Beadand\u00F3\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{75BC4764-DB5F-42A6-891B-CD6657B0C93A}|WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\WEB_Beadand\u00F3.Client.csproj|c:\\users\\gda939\\desktop\\web_beadand\u00F3\\web_beadand\u00F3\\web_beadand\u00F3.client\\pages\\main\\autok.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75BC4764-DB5F-42A6-891B-CD6657B0C93A}|WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\WEB_Beadand\u00F3.Client.csproj|solutionrelative:web_beadand\u00F3\\web_beadand\u00F3.client\\pages\\main\\autok.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75BC4764-DB5F-42A6-891B-CD6657B0C93A}|WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\WEB_Beadand\u00F3.Client.csproj|c:\\users\\gda939\\desktop\\web_beadand\u00F3\\web_beadand\u00F3\\web_beadand\u00F3.client\\pages\\main\\brands.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75BC4764-DB5F-42A6-891B-CD6657B0C93A}|WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\WEB_Beadand\u00F3.Client.csproj|solutionrelative:web_beadand\u00F3\\web_beadand\u00F3.client\\pages\\main\\brands.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75BC4764-DB5F-42A6-891B-CD6657B0C93A}|WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\WEB_Beadand\u00F3.Client.csproj|c:\\users\\gda939\\desktop\\web_beadand\u00F3\\web_beadand\u00F3\\web_beadand\u00F3.client\\pages\\main\\telephely.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75BC4764-DB5F-42A6-891B-CD6657B0C93A}|WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\WEB_Beadand\u00F3.Client.csproj|solutionrelative:web_beadand\u00F3\\web_beadand\u00F3.client\\pages\\main\\telephely.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Brands.razor",
+              "DocumentMoniker": "C:\\Users\\GDA939\\Desktop\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Brands.razor",
+              "RelativeDocumentMoniker": "WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Brands.razor",
+              "ToolTip": "C:\\Users\\GDA939\\Desktop\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Brands.razor",
+              "RelativeToolTip": "WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Brands.razor",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHYAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-10T12:50:28.965Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Telephely.razor",
+              "DocumentMoniker": "C:\\Users\\GDA939\\Desktop\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Telephely.razor",
+              "RelativeDocumentMoniker": "WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Telephely.razor",
+              "ToolTip": "C:\\Users\\GDA939\\Desktop\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Telephely.razor",
+              "RelativeToolTip": "WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Telephely.razor",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAH4AAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-10T12:48:57.661Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Autok.razor",
+              "DocumentMoniker": "C:\\Users\\GDA939\\Desktop\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Autok.razor",
+              "RelativeDocumentMoniker": "WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Autok.razor",
+              "ToolTip": "C:\\Users\\GDA939\\Desktop\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Autok.razor",
+              "RelativeToolTip": "WEB_Beadand\u00F3\\WEB_Beadand\u00F3.Client\\Pages\\Main\\Autok.razor",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAAAIYAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-10T12:44:52.4Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

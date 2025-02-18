@@ -1,0 +1,132 @@
+﻿@page "/types"
+@using DataModels;
+@rendermode InteractiveServer
+
+@code{
+    [Inject] public required IHttpClientFactory HttpClientFactory { get; set; }
+
+    private List<DataModels.Type> TypeList = new();
+    private IList<DataModels.Type>? selectedType;
+    private RadzenDataGrid<DataModels.Type>? TypeGrid;
+
+    private bool NoSelection
+    => selectedType is null || selectedType.Count == 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        TypeList.Clear();
+
+        var client = HttpClientFactory.CreateClient("ServerAPI");
+        var respb = await client.GetFromJsonAsync<List<DataModels.Type>>(APIUri.TypeGetList);
+        if (respb is not null)
+        {
+            TypeList.AddRange(respb);
+            if (TypeGrid is not null)
+            {
+                await TypeGrid.Reload();
+            }
+        }
+
+        StateHasChanged();
+
+    }
+
+    TypeDto newType = new TypeDto();
+
+    bool Open = false;
+    void NewData()
+    {
+        Open = true;
+    }
+
+    void Close()
+    {
+        Open = false;
+    }
+
+    async Task SaveType()
+    {
+        var client = HttpClientFactory.CreateClient("ServerAPI");
+
+        var response = await client.PostAsJsonAsync("api/types", newType);
+
+        if (response.IsSuccessStatusCode)
+        {
+            await OnInitializedAsync();
+        }
+        else
+        {
+            Console.WriteLine("Hiba történt az autó mentésekor.");
+        }
+    }
+
+    async Task DeleteType()
+    {
+        if (selectedType != null)
+        {
+            var typeToDelete = selectedType.First();
+            var client = HttpClientFactory.CreateClient("ServerAPI");
+
+            var response = await client.DeleteAsync($"/api/types/{typeToDelete.typeId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Ha sikerült a törlés, frissítjük a listát
+                TypeList.Remove(typeToDelete);
+                await TypeGrid.Reload();
+            }
+            else
+            {
+                // Hiba kezelése
+                Console.WriteLine("Hiba történt a törlés során.");
+            }
+        }
+    }
+}
+
+<PageTitle>Autótípusok</PageTitle>
+
+@if (!RendererInfo.IsInteractive)
+{
+    <p><em>Betöltés folyamatban...</em></p>
+}
+else
+{
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css">
+
+    <RadzenRow>
+        <RadzenColumn Size="12">
+            <RadzenDataGrid @ref="TypeGrid" Data="TypeList" PageSize="5" ColumnWidth="100%" AllowSorting="true"
+                            SelectionMode="DataGridSelectionMode.Single" AllowSotring="true" @bind-Value=@selectedType>
+                <Columns>
+                    <RadzenDataGridColumn Property="@nameof(DataModels.Type.typeId)" Title="Azonostó" />
+                    <RadzenDataGridColumn Property="@nameof(DataModels.Type.brandId)" Title="Márka azonostó" />
+                    <RadzenDataGridColumn Property="@nameof(DataModels.Type.typeName)" Title="Név" />
+                </Columns>
+            </RadzenDataGrid>
+        </RadzenColumn>
+
+        <RadzenColumn Size="2">
+            <RadzenStack Orientation="Orientation.Vertical" Gap="12px">
+                <RadzenButton Text="Új" ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Dark" Style="width: 96pt" Click="NewData"/>
+                <RadzenButton Text="Törlés" Disabled=@NoSelection
+                              ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter" Style="width: 96pt" Click="DeleteType" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+
+    <RadzenTemplateForm Data="@newType" TContext="Type" Visible="@Open">
+        <RadzenStack Orientation="Orientation.Vertical" Gap="12px">
+            <RadzenLabel Text="Márka azonosító" For="newType.brandId" />
+            <RadzenNumeric @bind-Value="newType.brandId" Placeholder="Márka azonosító" />
+
+            <RadzenLabel Text="Típus neve" For="newType.typeName" />
+            <RadzenNumeric @bind-Value="newType.typeName" Placeholder="Név" />
+
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="12px">
+                <RadzenButton Text="Mégse" ButtonStyle="ButtonStyle.Secondary" Click="Close" />
+                <RadzenButton Text="Mentés" ButtonStyle="ButtonStyle.Primary" Click="SaveType"/>
+            </RadzenStack>
+        </RadzenStack>
+    </RadzenTemplateForm>
+}

@@ -1,0 +1,286 @@
+[
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Branch.BranchEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddBranchEndpoints\u003Eb__0_2",
+    "RelativePath": "api/branches",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newBranch",
+        "Type": "DataModels.BranchDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Branch.BranchEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddBranchEndpoints\u003Eb__0_1",
+    "RelativePath": "api/branches/{branchesId}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "branchesId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Brands.BrandEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddBrandEndpoints\u003Eb__0_1",
+    "RelativePath": "api/brands",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newBrand",
+        "Type": "DataModels.BrandDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Brands.BrandEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddBrandEndpoints\u003Eb__0_2",
+    "RelativePath": "api/brands/{brandId}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "brandId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Car.CarEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddCarEndpoints\u003Eb__0_2",
+    "RelativePath": "api/cars",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newCar",
+        "Type": "DataModels.CarDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Car.CarEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddCarEndpoints\u003Eb__0_1",
+    "RelativePath": "api/cars/{carId}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "carId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Types.TypeEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddTypeEndpoints\u003Eb__0_2",
+    "RelativePath": "api/types",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newType",
+        "Type": "DataModels.TypeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Types.TypeEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddTypeEndpoints\u003Eb__0_1",
+    "RelativePath": "api/types/{typeId}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "typeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Branch.BranchEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddBranchEndpoints\u003Eb__0_0",
+    "RelativePath": "branches/getlist",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[DataModels.Branches, DataModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      }
+    ],
+    "EndpointName": "GetBranchList",
+    "Description": "Leiras"
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Brands.BrandEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddBrandEndpoints\u003Eb__0_0",
+    "RelativePath": "brands/getList",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[DataModels.Brand, DataModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      }
+    ],
+    "EndpointName": "GetBrandList",
+    "Description": "Leiras"
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Car.CarEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddCarEndpoints\u003Eb__0_0",
+    "RelativePath": "cars/getlist",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[DataModels.Car, DataModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      }
+    ],
+    "EndpointName": "GetCarList",
+    "Description": "Leiras"
+  },
+  {
+    "ContainingType": "WEB_Beadand\u00F3.EndPoints.Types.TypeEP\u002B\u003C\u003Ec",
+    "Method": "\u003CAddTypeEndpoints\u003Eb__0_0",
+    "RelativePath": "types/getList",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[DataModels.Type, DataModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      }
+    ],
+    "EndpointName": "GetTypeList",
+    "Description": "Leiras"
+  }
+]

@@ -1,0 +1,128 @@
+﻿@page "/brands"
+@using DataModels;
+@rendermode InteractiveServer
+
+@code{
+    [Inject] public required IHttpClientFactory HttpClientFactory { get; set; }
+
+    private List<Brand> BrandList = new();
+    private IList<Brand>? selectedBrand;
+    private RadzenDataGrid<Brand>? brandGrid;
+
+    private bool NoSelection
+    => selectedBrand is null || selectedBrand.Count == 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        BrandList.Clear();
+
+        var client = HttpClientFactory.CreateClient("ServerAPI");
+        var respb = await client.GetFromJsonAsync<List<Brand>>(APIUri.BrandGetList);
+        if (respb is not null)
+        {
+            BrandList.AddRange(respb);
+            if (brandGrid is not null)
+            {
+                await brandGrid.Reload();
+            }
+        }
+
+        StateHasChanged();
+
+    }
+
+    BrandDto newBrand = new BrandDto();
+
+    bool Open = false;
+    void NewData()
+    {
+        Open = true;
+    }
+
+    void Close()
+    {
+        Open = false;
+    }
+
+    async Task SaveBrand()
+    {
+        var client = HttpClientFactory.CreateClient("ServerAPI");
+
+        var response = await client.PostAsJsonAsync("api/brands", newBrand);
+
+        if (response.IsSuccessStatusCode)
+        {
+            await OnInitializedAsync();
+        }
+        else
+        {
+            Console.WriteLine("Hiba történt az autó mentésekor.");
+        }
+    }
+
+    async Task DeleteBrand()
+    {
+        if (selectedBrand != null)
+        {
+            var brandToDelete = selectedBrand.First();
+            var client = HttpClientFactory.CreateClient("ServerAPI");
+
+            var response = await client.DeleteAsync($"/api/brands/{brandToDelete.brandID}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Ha sikerült a törlés, frissítjük a listát
+                BrandList.Remove(brandToDelete);
+                await brandGrid.Reload();
+            }
+            else
+            {
+                // Hiba kezelése
+                Console.WriteLine("Hiba történt a törlés során.");
+            }
+        }
+    }
+}
+
+<PageTitle>Autómárkák</PageTitle>
+
+@if (!RendererInfo.IsInteractive)
+{
+    <p><em>Betöltés folyamatban...</em></p>
+}
+else
+{
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css">
+
+     <RadzenRow>
+        <RadzenColumn Size="12">
+            <RadzenDataGrid @ref="brandGrid" Data="BrandList" PageSize="5" ColumnWidth="100%" AllowSorting="true"
+                SelectionMode="DataGridSelectionMode.Single" AllowSotring = "true" @bind-Value=@selectedBrand>
+                <Columns>
+                    <RadzenDataGridColumn Property="@nameof(Brand.brandID)" Title="Azonostó" />
+                    <RadzenDataGridColumn Property="@nameof(Brand.brandName)" Title="Név"/>
+                </Columns>
+            </RadzenDataGrid>
+        </RadzenColumn>
+
+        <RadzenColumn Size="2">
+            <RadzenStack Orientation="Orientation.Vertical" Gap="12px">
+                <RadzenButton Text="Új" ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Dark" Style="width: 96pt" Click="NewData" />
+                <RadzenButton Text="Törlés" Disabled=@NoSelection
+                              ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter" Style="width: 96pt" Click="DeleteBrand" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+
+    <RadzenTemplateForm Data="@newBrand" TContext="Brand" Visible="@Open">
+        <RadzenStack Orientation="Orientation.Vertical" Gap="12px">
+            <RadzenLabel Text="Márka neve" For="newBrand.brandName" />
+            <RadzenNumeric @bind-Value="newBrand.brandName" Placeholder="Név" />
+
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="12px">
+                <RadzenButton Text="Mégse" ButtonStyle="ButtonStyle.Secondary" Click="Close" />
+                <RadzenButton Text="Mentés" ButtonStyle="ButtonStyle.Primary" Click="SaveBrand"/>
+            </RadzenStack>
+        </RadzenStack>
+    </RadzenTemplateForm>
+}

@@ -1,0 +1,4 @@
+C:\Users\GDA939\Desktop\WEB_Beadandó\WEB_Beadandó\WEB_Beadandó.Client\wwwroot\appsettings.Development.json
+C:\Users\GDA939\Desktop\WEB_Beadandó\WEB_Beadandó\WEB_Beadandó.Client\wwwroot\appsettings.json
+wwwroot\appsettings.Development.json
+wwwroot\appsettings.json

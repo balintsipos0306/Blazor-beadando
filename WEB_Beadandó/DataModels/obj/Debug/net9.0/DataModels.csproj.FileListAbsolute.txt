@@ -1,0 +1,12 @@
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\bin\Debug\net9.0\DataModels.deps.json
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\bin\Debug\net9.0\DataModels.dll
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\bin\Debug\net9.0\DataModels.pdb
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\obj\Debug\net9.0\DataModels.csproj.AssemblyReference.cache
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\obj\Debug\net9.0\DataModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\obj\Debug\net9.0\DataModels.AssemblyInfoInputs.cache
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\obj\Debug\net9.0\DataModels.AssemblyInfo.cs
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\obj\Debug\net9.0\DataModels.csproj.CoreCompileInputs.cache
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\obj\Debug\net9.0\DataModels.dll
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\obj\Debug\net9.0\refint\DataModels.dll
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\obj\Debug\net9.0\DataModels.pdb
+C:\Users\GDA939\Desktop\WEB_Beadandó\DataModels\obj\Debug\net9.0\ref\DataModels.dll
